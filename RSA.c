@@ -1,34 +1,20 @@
 #include <stdio.h>
 #include <math.h>
 
-int main(void){
-    long p, q, e, c, x, y, m, m2, n, i;
-    double d, rslt;
-    p = 37;
-    q = 71;
-    e = 79;
-    n = p * q;
-    c = 904;
-    x = (p - 1) * (q - 1);
-    y = e - 1;
-
-    printf("n=%d\n", n);
-    printf("x=%d\n", x);
-
-    for(m=1; m<e; m++){ //mの開始値は1、終了値はmがeより大きくなるまで、増分値は1ずつ
-        if(m * x % e == y){
-            break; //if文抜ける
+int main(void) {
+    int p = 37, q = 71, e = 79;
+    int n = p * q;
+    int m = -1;
+    int phi = (p - 1) * (q - 1);
+    for (int i = 1; i < phi; i++) {
+        if ((phi * i + 1) % e == 0) {
+            m = i;
+            break;
         }
     }
-    printf("m=%d\n", m);
-
-    d = (m * (p - 1) * (q - 1) + 1) / e;
-    printf("d=%d\n", d);
-    
-    rslt = pow((long)c, (long)d);
-    printf("rslt=%lf\n", rslt);
-    m2 = (long)rslt % n;
-    printf("m2=%d\n", m2);
-
+    int d = (m * phi + 1) / e;
+    int c = 904;
+    int M = pow((double)c, (double)d) % n;
+    printf("The original message is: %d\n", M);
     return 0;
-        }
+}
